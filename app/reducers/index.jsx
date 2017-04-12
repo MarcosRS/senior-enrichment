@@ -39,6 +39,7 @@ const rootReducer = function(state = initialState, action) {
     break
 
     case CREATE_STUDENT:
+    console.log(action.newStudent)
     	newState.students = [...newState.students, action.newStudent]
     break
 
@@ -93,6 +94,7 @@ export const createStudent = (name,email,campusId) => dispatch => {
         {name:name,email:email,CampusId: campusId}
       )
       .then(response => {
+      	console.log(response)
          dispatch(createNewStudent(response.data))
       })
       .catch(err => console.error('Student Creation unsuccessful', err));

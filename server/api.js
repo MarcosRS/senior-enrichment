@@ -51,8 +51,19 @@ api.post('/students',function(req,res,next){
 	
 	Student.create(req.body)
 	.then((data)=>{ 
-		res.status(201).send(data) 
-	}).catch(err => {
+		data.getCampus()
+		.then(campus => {
+			data.dataValues.Campus = campus.dataValues
+			console.log(data) 
+
+			res.json(data)		
+		})
+		.catch(err => {
+			console.log(err)
+		})
+
+	})
+	.catch(err => {
 		console.log(err)
 	})
 })
